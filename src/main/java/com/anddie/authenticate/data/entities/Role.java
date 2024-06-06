@@ -1,6 +1,7 @@
 package com.anddie.authenticate.data.entities;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.LinkedHashSet;
@@ -10,6 +11,7 @@ import java.util.Set;
 @Entity
 @Table(name = "role")
 @IdClass(RoleId.class)
+@Builder
 public class Role {
 
     @Id
@@ -26,4 +28,7 @@ public class Role {
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Set<User> users = new LinkedHashSet<>();
 
+    public Role() {
+
+    }
 }
