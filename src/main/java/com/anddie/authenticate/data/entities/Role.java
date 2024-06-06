@@ -1,19 +1,24 @@
-package com.anddie.authenticate.entities;
+package com.anddie.authenticate.data.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name = "role")
+@IdClass(RoleId.class)
 public class Role {
-    @EmbeddedId
-    private RoleId id;
+
+    @Id
+    @Column(name = "name", nullable = false, length = 50)
+    private String name;
+
+    @Id
+    @Column(name = "code", nullable = false)
+    private Integer code;
 
     @ManyToMany
     @JoinTable(name = "user_role",

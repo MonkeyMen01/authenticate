@@ -1,6 +1,5 @@
-package com.anddie.authenticate.entities;
+package com.anddie.authenticate.data.entities;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,13 +13,8 @@ import java.util.Objects;
 @Embeddable
 public class UserRoleId implements Serializable {
     private static final long serialVersionUID = 7504992670968176782L;
-    @Column(name = "role_code", nullable = false)
     private Integer roleCode;
-
-    @Column(name = "user_id", nullable = false, length = 36)
     private String userId;
-
-    @Column(name = "role_name", nullable = false, length = 50)
     private String roleName;
 
     @Override

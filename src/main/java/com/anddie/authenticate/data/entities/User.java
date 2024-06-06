@@ -1,14 +1,12 @@
-package com.anddie.authenticate.entities;
+package com.anddie.authenticate.data.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name = "user")
 public class User {

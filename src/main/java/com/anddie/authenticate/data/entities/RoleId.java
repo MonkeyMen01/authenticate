@@ -1,7 +1,5 @@
-package com.anddie.authenticate.entities;
+package com.anddie.authenticate.data.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.Hibernate;
@@ -11,13 +9,11 @@ import java.util.Objects;
 
 @Getter
 @Setter
-@Embeddable
 public class RoleId implements Serializable {
     private static final long serialVersionUID = -7654521594645874129L;
-    @Column(name = "name", nullable = false, length = 50)
+
     private String name;
 
-    @Column(name = "code", nullable = false)
     private Integer code;
 
     @Override
