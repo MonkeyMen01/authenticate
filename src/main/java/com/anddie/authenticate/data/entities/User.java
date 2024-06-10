@@ -1,8 +1,11 @@
 package com.anddie.authenticate.data.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -11,8 +14,15 @@ import java.util.Set;
 @Entity
 @Table(name = "user")
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
     @Id
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator"
+    )
     @Column(name = "id", nullable = false, length = 36)
     private String id;
 
@@ -31,7 +41,4 @@ public class User {
     @ManyToMany(mappedBy = "users")
     private Set<Role> roles = new LinkedHashSet<>();
 
-    public User() {
-
-    }
 }
