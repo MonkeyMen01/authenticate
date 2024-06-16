@@ -32,6 +32,7 @@ public class JwtTokenUtil extends GlobalLogger {
     @Value("${jwt.issuer}")
     private String issuer;
 
+    private static final String BEARER = "Bearer ";
     /**
      * Generate JWT Token
      * @param id The user's id
@@ -58,11 +59,15 @@ public class JwtTokenUtil extends GlobalLogger {
      */
     public boolean validateToken(final String token,String userId) {
         try {
+            if(!token.startsWith(BEARER)){
+                throw new JWTVerificationException("Invalid JWT token");
+            }
+            final String cleanedToken = token.substring(7);
             Algorithm algorithm = Algorithm.HMAC256(secret);
             JWTVerifier verifier = JWT.require(algorithm)
                     .withIssuer(issuer)
                     .build();
-            DecodedJWT jwt = verifier.verify(token);
+            DecodedJWT jwt = verifier.verify(cleanedToken);
             String id = jwt.getClaim("id").asString();
             return (id.equals(userId) && !isTokenExpired(jwt));
         }catch (JWTVerificationException e){
